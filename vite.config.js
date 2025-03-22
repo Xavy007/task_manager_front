@@ -7,4 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss()],
+    optimizeDeps: {
+      include: ['axios'],  // Asegurarte de que axios esté incluido
+    },
 })
