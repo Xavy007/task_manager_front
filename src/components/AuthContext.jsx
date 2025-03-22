@@ -1,29 +1,28 @@
 import { createContext, useContext, useState, useEffect } from "react";
-const AuthContext = createContext();
+import Cookies from "js-cookie"; 
 
-// Hook para acceder al contexto
+export const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
-// Proveedor de autenticación
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
- console.log(children)
-  // Verificar si el usuario está autenticado (ej. verificando el token en localStorage)
+ console.log(user)
+ 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = Cookies.get("token"); 
     if (token) {
       setUser({ token });
     }
   }, []);
 
   const login = (token) => {
-    localStorage.setItem("token", token);
+    console.log(token)
+    Cookies.set("token", token, { expires: 1, secure: true, sameSite: "Strict" }); 
     setUser({ token });
   };
 
   const logout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
+    Cookies.remove("token"); 
   };
 
   return (

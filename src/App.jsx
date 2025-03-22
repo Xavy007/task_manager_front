@@ -16,8 +16,12 @@ function App() {
         <Route path="/" element={<Login />}/>
         <Route path="/register" element={<Register />}/>
         <Route path="/error" element={<Error />}/>
-        <Route path="/tasks" element={<Tasks />}/>
-        <Route path="/users" element={<Users />}/>
+        <Route path="/tasks" element={
+          <ProtectedRoute><Tasks /></ProtectedRoute>}/>
+        <Route path="/users" element={
+          <ProtectedRoute><Users />
+          </ProtectedRoute>}/>
+
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard />
