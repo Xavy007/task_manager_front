@@ -48,9 +48,10 @@ const Tasks = () => {
     }
   };
 
-  const handleEdit = (task) => {
+  const handleEdit = (id,task) => {
     setEditingTask(task);
     setFormData({
+      id:id,
       title: task.title,
       description: task.description,
       deadline: new Date(task.deadline).toISOString().split("T")[0], // Formato YYYY-MM-DD
@@ -82,7 +83,7 @@ const Tasks = () => {
       cell: (row) => (
         <div>
           {row.estate !== "terminado" && (
-          <><button onClick={() => handleEdit(row)} className="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2">
+          <><button onClick={() => handleEdit(row.id,row)} className="bg-yellow-500 text-white px-3 py-1 rounded-md mr-2">
               ✏️ Editar
             </button><button onClick={() => handleDelete(row.id, row.estate)} className="bg-red-500 text-white px-3 py-1 rounded-md">
                 ❌ Eliminar
